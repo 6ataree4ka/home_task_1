@@ -8,13 +8,13 @@ class Pen(object):
         self.color = kwargs.get('color', 'blue')
 
     def write(self, word):
-        if not self.get_color:
+        if not self.check_pen_state():
             return ''
         size_of_word = len(word) * self.size_letter
         if size_of_word <= self.ink_container_value:
             self.ink_container_value -= size_of_word
             return word
-        part_of_word = word[0: self.ink_container_value]
+        part_of_word = word[0: self.ink_container_value] # found a bug (size_letter is not used)
         self.ink_container_value = 0
         return part_of_word
 
@@ -27,6 +27,3 @@ class Pen(object):
 
     def do_something_else(self):
         print(self.color)
-
-
-
